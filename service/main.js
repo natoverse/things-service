@@ -2,6 +2,7 @@
 
 var express = require('express'),
     http = require('http'),
+    path = require('path'),
     todos = require('./todos'),
     app = express(),
     port = process.env.PORT || 3000;
@@ -27,6 +28,9 @@ app.get('/api/v1/things/todos/:id', function (req, res, next) {
     });
 
 });
+
+//load up the statusboard panels as static content
+app.use(express.static(path.resolve(__dirname, '../statusboard')));
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
