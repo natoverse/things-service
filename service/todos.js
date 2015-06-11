@@ -1,13 +1,14 @@
 'use strict';
 
-var applescript = require('applescript'),
+var path = require('path'),
+    applescript = require('applescript'),
     Promise = require('bluebird');
 
 function getTodayList() {
 
     var promise = new Promise(function (resolve, reject) {
 
-        applescript.execFile('/Users/nato/github/things-service/applescript/things.applescript', function (err, result) {
+        applescript.execFile(path.normalize(__dirname + '/../applescript/things.applescript'), function (err, result) {
             if (err) {
                 reject(err);
             } else {
