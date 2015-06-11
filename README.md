@@ -10,11 +10,13 @@ Well, all it really does right now is list out the current day's tasks: `http://
 
 ## Getting Started
 
-Well, at a minimum you're gonna need a Mac with Things installed. This will allow execution of the AppleScript code, which extracts task lists. The services themselves are run with Node.js:
+Well, at a minimum you're gonna need a Mac with Things installed. This will allow execution of the AppleScript code, which extracts task lists. The services themselves are run with Node.js, and Grunt to help out.
 
-`npm install`
-
-`npm start`
+1. Install Node.js if you don't have it
+1. Install grunt cli if you don't have it `npm install -g grunt-cli`
+1. Install deps `npm install`
+1. Run code quality checks `npm test`
+1. Start services `npm start`
 
 ## Organization
 

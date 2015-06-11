@@ -30,13 +30,12 @@ module.exports = {
 
     //just assumes we're looking for 'today' at the moment, since that's all that has been built into the applescript.
     find: function () {
-       return getTodayList();
+        return getTodayList();
     },
 
     findOne: function (id) {
 
         var promise = new Promise(function (resolve, reject) {
-
 
             getTodayList().then(function (results) {
 
@@ -54,6 +53,7 @@ module.exports = {
                 } else {
                     reject();
                 }
+
             });
         });
 
