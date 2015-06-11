@@ -44,7 +44,6 @@ on serialize(props)
 	set counter to 0
 	
 	repeat with x in props as list
-		#		log counter & x
 		if counter = 0 then
 			set stat to x
 		end if
@@ -59,7 +58,7 @@ on serialize(props)
 	
 	set tagstr to format_tags(tags)
 	
-	set json to "{\"id\":\"" & id of props & "\",\"name\":\"" & name of props & "\",\"tags\":" & tagstr & "}"
+	set json to "{\"id\":\"" & id of props & "\",\"name\":\"" & name of props & "\",\"tags\":" & tagstr & ",\"status\":\"" & (stat as string) & "\"" & "}"
 	
 	return json
 	

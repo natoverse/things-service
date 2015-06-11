@@ -63,6 +63,7 @@
                         check.type = 'checkbox';
                         check.id = checkId;
                         check.value = todo.id;
+                        check.checked = (todo.status === 'completed');
                         label.id = labelId;
                         label.innerHTML = name.substr(0, 1).toUpperCase() + name.substr(1, name.length);
                         td.appendChild(check);
@@ -71,6 +72,10 @@
                         table.appendChild(tr);
                         $('#' + labelId).attr('for', checkId);
 
+                        if (check.checked) {
+                            $('#' + labelId).addClass('done');
+                        }
+                        
                         check.addEventListener('change', function (e) {
                             if (e.target.checked) {
                                 $('#label-' + e.target.value).addClass('done');
