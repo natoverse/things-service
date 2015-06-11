@@ -5,7 +5,9 @@ REST web service wrapper around the Things API
 
 ## Features
 
-Well, all it really does right now is list out the current day's tasks: `http://<host>:<port>/api/v1/things/lists/today`.
+All it really does right now is list out the current day's tasks: `http://<host>:<port>/api/v1/things/lists/today`.
+
+You can also get an individual task (which will eventually be expanded to include editing): `http://<host>:<port>/api/v1/things/todos/:id`. 
 
 
 ## Getting Started
