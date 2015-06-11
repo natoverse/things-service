@@ -28,7 +28,12 @@ Well, at a minimum you're gonna need a Mac with Things installed. This will allo
  
 ## Contributing
 
-I'm open to any help I can get to expand the functionality. I don't really have a roadmap yet, but ideas are welcome. I suck at AppleScript.
+I'm open to any help I can get to expand the functionality.
+I don't really have a roadmap yet, but ideas are welcome.
+There are lots of things the AppleScript API exposes that may be useful/desirable to different people.
+My main use case is seeing the days tasks, and preferably being able to mark them as complete.
+
+I suck at AppleScript.
 
 ## License
-[Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0). Do something with it.
+[Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0)
