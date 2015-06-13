@@ -2,18 +2,36 @@
 
 var path = require('path'),
     applescript = require('applescript'),
-    Promise = require('bluebird');
+    Promise = require('bluebird'),
+    listScript = path.normalize(__dirname + '/../applescript/list-todos.applescript'),
+    updateScript = path.normalize(__dirname + '/../applescript/update-todo.applescript');
 
-function getTodayList() {
+function getList(listName) {
 
     var promise = new Promise(function (resolve, reject) {
 
-        applescript.execFile(path.normalize(__dirname + '/../applescript/things.applescript'), function (err, result) {
+        applescript.execFile(listScript, [listName], function (err, result) {
             if (err) {
                 reject(err);
             } else {
-
                 resolve(JSON.parse(result));
+            }
+        });
+
+    });
+
+    return promise;
+}
+
+function updateStatus(listName, id, status) {
+
+    var promise = new Promise(function (resolve, reject) {
+
+        applescript.execFile(updateScript, [listName, id, status], function (err, result) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(true);
             }
         });
 
@@ -29,15 +47,15 @@ function getTodayList() {
 module.exports = {
 
     //just assumes we're looking for 'today' at the moment, since that's all that has been built into the applescript.
-    find: function () {
-        return getTodayList();
+    find: function (listName) {
+        return getList(listName);
     },
 
     findOne: function (id) {
 
         var promise = new Promise(function (resolve, reject) {
 
-            getTodayList().then(function (results) {
+            getList('today').then(function (results) {
 
                 var match;
 
@@ -58,6 +76,13 @@ module.exports = {
         });
 
         return promise;
+    },
+
+    setStatus: function (params) {
+        var listName = params.list,
+            id = params.id,
+            status = params.status;
+        return updateStatus(listName, id, status);
     }
 
 };

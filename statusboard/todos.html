@@ -39,20 +39,45 @@
 <body>
 
     <table>
-        <thead><tr><th>TODAY</th></tr></thead>
-        <tbody id="today"></tbody>
+        <thead><tr><th id="title"></th></tr></thead>
+        <tbody id="list"></tbody>
     </table>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script>
 
-        function loadToday() {
+        var urlParams = {};
+        (function () {
+            var match,
+                pl = /\+/g,  // Regex for replacing addition symbol with a space
+                search = /([^&=]+)=?([^&]*)/g,
+                decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+                query  = window.location.search.substring(1);
 
-            $.ajax('api/v1/things/lists/today', {
+            while (match = search.exec(query)) {
+                urlParams[decode(match[1])] = decode(match[2]);
+            }
+        })();
+
+        var list = urlParams['list'] || 'today',
+            root = 'api/v1/things/lists/' + list + '/todos',
+            refresh = urlParams['refresh'] || 600000;
+
+        $('#title').html(list.toUpperCase());
+
+        function setStatus(id, status) {
+            $.ajax(root + '/' + id + '/status/' + status, {
+                method: 'PUT'
+            });
+        }
+
+        function load() {
+
+            $.ajax(root, {
                 success: function (todos) {
 
-                    $('#today').empty();
-                    var table = $('#today')[0];
+                    $('#list').empty();
+                    var table = $('#list')[0];
 
                     todos.forEach(function (todo) {
 
@@ -83,8 +108,10 @@
                         check.addEventListener('change', function (e) {
                             if (e.target.checked) {
                                 $('#label-' + e.target.value).addClass('done');
+                                setStatus(e.target.value, 'completed');
                             } else {
                                 $('#label-' + e.target.value).removeClass('done');
+                                setStatus(e.target.value, 'open');
                             }
                         });
 
@@ -93,7 +120,8 @@
             });
         }
 
-        loadToday();
+        load();
+        setInterval(load, refresh);
 
     </script>
 

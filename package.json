@@ -17,6 +17,8 @@
     "service",
     "rest",
     "applescript",
+    "cultured code",
+    "api",
     "statusboard"
   ],
   "author": "natoverse",
@@ -29,7 +31,7 @@
   "homepage": "https://github.com/natoverse/things-service",
   "dependencies": {
     "express": "^4.12.2",
-    "applescript": "1.0.0",
+    "applescript": "0.2.1",
     "bluebird": "2.9.27"
   },
   "devDependencies": {

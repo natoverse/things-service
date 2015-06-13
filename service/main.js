@@ -9,23 +9,46 @@ var express = require('express'),
 
 app.set('port', port);
 
-app.get('/api/v1/things/lists/:list', function (req, res, next) {
+var listMap = {},
+    lists = ['inbox', 'today', 'next', 'scheduled', 'someday', 'projects', 'logbook', 'trash'];
 
-    if (req.params.list !== 'today') {
-        res.sendStatus(501);
+lists.forEach(function (list) {
+    listMap[list] = true;
+});
+
+app.get('/api/v1/things/lists/:list/todos', function (req, res, next) {
+
+    if (!listMap[req.params.list]) {
+        res.sendStatus(400);
     }
 
-    todos.find().then(function (result) {
+    todos.find(req.params.list).then(function (result) {
         res.json(result);
     });
 
 });
 
-app.get('/api/v1/things/todos/:id', function (req, res, next) {
+app.get('/api/v1/things/lists/:list/todos/:id', function (req, res, next) {
 
     todos.findOne(req.params.id).then(function (result) {
         res.json(result);
+    }).catch(function (err) {
+        console.log(err);
+        res.setStatus(500);
     });
+
+});
+
+app.put('/api/v1/things/lists/:list/todos/:id/status/:status', function (req, res, next) {
+
+    //TODO: general-purpose update?
+    if (req.params.status === 'completed' || req.params.status === 'open') {
+        todos.setStatus(req.params).then(function (result) {
+            res.sendStatus(200);
+        });
+    } else {
+        res.sendStatus(400);
+    }
 
 });
 

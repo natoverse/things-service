@@ -5,9 +5,9 @@ REST web service wrapper around the Things API
 
 ## Features
 
-All it really does right now is list out the current day's tasks: `http://<host>:<port>/api/v1/things/lists/today`.
-
-You can also get an individual task (which will eventually be expanded to include editing): `http://<host>:<port>/api/v1/things/todos/:id`. 
+* Show tasks for a named list: `GET http://<host>:<port>/api/v1/things/lists/today/todos`. (any valid Things list will work, such as 'inbox', 'next', etc.)
+* Get an individual task (which will eventually be expanded to include editing): `GET http://<host>:<port>/api/v1/things/lists/today/todos/:id`.
+* Updated status for a task ('completed' or 'open'): `PUT http://<host>:<port>/api/v1/things/lists/today/todos/:id/status/completed`
 
 ## Getting Started
 
@@ -26,7 +26,10 @@ Panic has instructions to do that [here](https://panic.com/statusboard/docs/diy_
 
 1. Start this app.
 1. Find your Mac's IP address (easy way: System Preferences --> Network, it should be listed there.)
-1. Open the StatusBoard app, add a new 'DIY' panel, and in the URL field, enter `http://<mac ip address>:3000/today.html`
+1. Open the StatusBoard app, add a new 'DIY' panel, and in the URL field, enter `http://<mac ip address>:3000/todos.html`
+    * Options (add as query params to URL)
+        * `list`: which list to display, defaults to 'today'
+        * `refresh`: how often to update panel, defaults to 600000 (once per hour)
 
 Obviously this will all only work if your iPad is on the same network as the Mac running this service.
 If you want it on the web, I guess you'll need to either open your firewall or find a host that will run a Mac.

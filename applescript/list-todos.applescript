@@ -1,3 +1,10 @@
+on run argv
+	#make it all happen
+	set list_name to item 1 of argv
+	set json to things_json(list_name)
+	return json
+end run
+
 on split(str, delim)
 	set oldDelimiters to AppleScript's text item delimiters
 	set AppleScript's text item delimiters to delim
@@ -79,7 +86,3 @@ on things_json(list_name)
 	return all_json
 end things_json
 
-#make it all happen
-set list_name to "Today"
-set json to things_json(list_name)
-return json
