@@ -1,13 +1,16 @@
 # things-service
 REST web service wrapper around the Things API
 
-[Things](https://culturedcode.com/things/) is an OSX/iOS app for managing tasks in a [GTD](http://gettingthingsdone.com/) style. I use it primarily for managing recurring tasks around the house. Things does not include much in the way of 3rd-party integration, however, they do have a small [AppleScript API](http://downloads.culturedcode.com/things/download/ThingsAppleScriptGuide.pdf). I wanted more ways to interact with Things, so this project exists to put a REST wrapper around some core task functionality, as well as some user interface options.
+[Things](https://culturedcode.com/things/) is an OSX/iOS app for managing tasks in a [GTD](http://gettingthingsdone.com/) style.
+I use it primarily for managing recurring tasks around the house.
+Things does not include much in the way of 3rd-party integration, however, they do have a small [AppleScript API](http://downloads.culturedcode.com/things/download/ThingsAppleScriptGuide.pdf).
+I wanted more ways to interact with Things, so this project exists to put a REST wrapper around some core task functionality, as well as some user interface options.
 
 ## Features
 
-* Show tasks for a named list: `GET http://<host>:<port>/api/v1/things/lists/today/todos`. (any valid Things list will work, such as 'inbox', 'next', etc.)
-* Get an individual task (which will eventually be expanded to include editing): `GET http://<host>:<port>/api/v1/things/lists/today/todos/:id`.
-* Updated status for a task ('completed' or 'open'): `PUT http://<host>:<port>/api/v1/things/lists/today/todos/:id/status/completed`
+* Show tasks for a named list: `GET /api/v1/things/lists/today/todos`. (any valid Things list will work, such as 'inbox', 'next', etc.)
+* Get an individual task (which will eventually be expanded to include editing): `GET /api/v1/things/lists/today/todos/:id`.
+* Updated status for a task ('completed' or 'open'): `PUT /api/v1/things/lists/today/todos/:id/status/completed`
 
 ## Getting Started
 
@@ -18,6 +21,8 @@ Well, at a minimum you're gonna need a Mac with Things installed. This will allo
 1. Install deps `npm install`
 1. Run code quality checks `npm test`
 1. Start services `npm start`
+
+By default it runs on port 3000, but you can change that with the `PORT` environment variable.
 
 ### StatusBoard
 
@@ -47,7 +52,7 @@ that keeps a web-available service updated.
 I'm open to any help I can get to expand the functionality.
 I don't really have a roadmap yet, but ideas are welcome.
 There are lots of things the AppleScript API exposes that may be useful/desirable to different people.
-My main use case is seeing the days tasks, and preferably being able to mark them as complete.
+My main use case is seeing the day's tasks and marking them as complete.
 
 I suck at AppleScript.
 
